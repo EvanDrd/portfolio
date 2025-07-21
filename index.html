@@ -4,13 +4,70 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mon Portfolio</title>
-  <style>
-    body { font-family: sans-serif; margin: 0; padding: 2rem; }
-    h1 { color: #333; }
-  </style>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="scripts/script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Bienvenue sur mon portfolio</h1>
-  <p>Je suis développeur web !</p>
+  <header>
+    <nav>
+      <h1 class="logo">MonNom</h1>
+      <ul>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#projects">Projets</a></li>
+        <li><a href="#skills">Compétences</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Développeur Web créatif</h2>
+        <p id="typing"></p>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section id="about" class="section fade-in">
+      <h2>À propos</h2>
+      <p>Développeur passionné, je crée des interfaces modernes, accessibles et efficaces avec HTML, CSS, JavaScript et des frameworks récents.</p>
+    </section>
+
+    <section id="projects" class="section fade-in">
+      <h2>Projets</h2>
+      <div class="project-grid">
+        <div class="project">
+          <img src="images/projet1.png" alt="Projet 1">
+          <h3>Anti-Virus Project</h3>
+          <p>Site e-commerce complet réalisé avec Quarkus, Angular et PostgreSQL.</p>
+        </div>
+        <div class="project">
+          <img src="images/projet2.png" alt="Projet 2">
+          <h3>Zombie Clicker</h3>
+          <p>Jeu mobile Godot mêlant clicker et tower defense contre des zombies.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section fade-in">
+      <h2>Compétences</h2>
+      <div class="skills">
+        <div class="skill">HTML/CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Java / Quarkus / Spring</div>
+        <div class="skill">Python</div>
+        <div class="skill">SQL / PostgreSQL</div>
+      </div>
+    </section>
+
+    <section id="contact" class="section fade-in">
+      <h2>Contact</h2>
+      <p>Tu peux me contacter par mail : <a href="mailto:monmail@example.com">monmail@example.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 MonNom. Portfolio inspiré par Namo K. & Luxman Mahesan.</p>
+  </footer>
 </body>
 </html>
