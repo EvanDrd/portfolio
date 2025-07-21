@@ -50,3 +50,31 @@ const appearOnScroll = new IntersectionObserver((entries, observer) => {
 faders.forEach(fader => {
   appearOnScroll.observe(fader);
 });
+
+// Animation compteur de visites
+function animateCount(target, endValue, duration = 1500) {
+  let start = 0;
+  const increment = Math.ceil(endValue / (duration / 16));
+  const update = () => {
+    start += increment;
+    if (start >= endValue) {
+      target.textContent = endValue;
+    } else {
+      target.textContent = start;
+      requestAnimationFrame(update);
+    }
+  };
+  requestAnimationFrame(update);
+}
+
+fetch('https://api.countapi.xyz/update/evan-portfolio/visits/?amount=1')
+  .then(res => res.json())
+  .then(data => {
+    const visitsElement = document.getElementById('visits');
+    animateCount(visitsElement, data.value);
+  })
+  .catch(err => {
+    console.error('Erreur compteur :', err);
+    document.getElementById('visits').textContent = '—';
+  });
+
