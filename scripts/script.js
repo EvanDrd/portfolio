@@ -1,7 +1,7 @@
 // Animation typing
 const phrases = [
   "Je transforme les idées en interfaces.",
-  "J'aime le code propre et les beaux designs.",
+  "Je suis passionné par l'apprentissage continu. ",
   "Bienvenue dans mon univers de développeur."
 ];
 const typingElement = document.getElementById("typing");
