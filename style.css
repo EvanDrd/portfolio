@@ -117,6 +117,31 @@ nav a:hover {
   font-weight: 500;
 }
 
+/* CONTACT */
+#contact {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+#contact p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+#contact a {
+  color: #007acc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#contact a:hover {
+  text-decoration: underline;
+}
+
 /* FOOTER */
 footer {
   text-align: center;
