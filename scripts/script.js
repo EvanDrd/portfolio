@@ -51,12 +51,11 @@ faders.forEach(fader => {
   appearOnScroll.observe(fader);
 });
 
-// Animation compteur de visites
 function animateCount(target, endValue, duration = 1500) {
   let start = 0;
-  const increment = Math.ceil(endValue / (duration / 16));
+  const step = Math.ceil(endValue / (duration / 16));
   const update = () => {
-    start += increment;
+    start += step;
     if (start >= endValue) {
       target.textContent = endValue;
     } else {
@@ -67,8 +66,21 @@ function animateCount(target, endValue, duration = 1500) {
   requestAnimationFrame(update);
 }
 
-fetch('https://api.countapi.xyz/update/evan-portfolio/visits/?amount=1')
-  .then(res => res.json())
+// Crée ou lit le compteur sans l'incrémenter
+fetch('https://api.countapi.xyz/get/evan-portfolio/visits')
+  .then(res => {
+    if (!res.ok) {
+      // Si le compteur n'existe pas encore, on le crée avec 0
+      return fetch('https://api.countapi.xyz/create?namespace=evan-portfolio&key=visits&value=0')
+        .then(() => ({ value: 0 }));
+    }
+    return res.json();
+  })
+  .then(data => {
+    // Une fois la valeur lue, on incrémente
+    return fetch('https://api.countapi.xyz/hit/evan-portfolio/visits')
+      .then(res => res.json());
+  })
   .then(data => {
     const visitsElement = document.getElementById('visits');
     animateCount(visitsElement, data.value);
@@ -77,4 +89,5 @@ fetch('https://api.countapi.xyz/update/evan-portfolio/visits/?amount=1')
     console.error('Erreur compteur :', err);
     document.getElementById('visits').textContent = '—';
   });
+
 
