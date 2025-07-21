@@ -66,28 +66,35 @@ function animateCount(target, endValue, duration = 1500) {
   requestAnimationFrame(update);
 }
 
-// Crée ou lit le compteur sans l'incrémenter
-fetch('https://api.countapi.xyz/get/evan-portfolio/visits')
-  .then(res => {
-    if (!res.ok) {
-      // Si le compteur n'existe pas encore, on le crée avec 0
-      return fetch('https://api.countapi.xyz/create?namespace=evan-portfolio&key=visits&value=0')
-        .then(() => ({ value: 0 }));
-    }
-    return res.json();
-  })
+const url = `https://api.jsonbin.io/v3/b/${CONFIG.JSONBIN_ID}`;
+
+fetch(url, {
+  method: "GET",
+  headers: {
+    "X-Master-Key": CONFIG.API_KEY
+  }
+})
+  .then(res => res.json())
   .then(data => {
-    // Une fois la valeur lue, on incrémente
-    return fetch('https://api.countapi.xyz/hit/evan-portfolio/visits')
-      .then(res => res.json());
+    const currentCount = data.record.visits + 1;
+
+    return fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": CONFIG.API_KEY
+      },
+      body: JSON.stringify({ visits: currentCount })
+    }).then(() => currentCount);
   })
-  .then(data => {
-    const visitsElement = document.getElementById('visits');
-    animateCount(visitsElement, data.value);
+  .then(updatedCount => {
+    animateCount(document.getElementById("visits"), updatedCount);
   })
   .catch(err => {
-    console.error('Erreur compteur :', err);
-    document.getElementById('visits').textContent = '—';
+    console.error("Erreur JSONBin :", err);
+    document.getElementById("visits").textContent = "—";
   });
+
+
 
 
